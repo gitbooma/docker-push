@@ -13,7 +13,7 @@ inputs:
   docker_compose:
     description: "docker-compose file to build and publish images from"
     required: true
- outputs:
+outputs:
   tag:
     description: "Tag that was published"
     value: ${{ steps.tag.outputs.semver }}
