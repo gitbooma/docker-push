@@ -27,12 +27,12 @@ runs:
         # if VERSION is not set, get it from git repo
         VERSION="${{ inputs.version }}"
         if [ -z "$VERSION" ]; then
-            VERSION=$(${{ GITHUB_ACTION_PATH }}/src/get_version.sh)
+            VERSION=$(${{ github_action_path }}/src/get_version.sh)
         fi
         echo "VERSION: $VERSION"
         echo "::set-output name=semver::$(echo $VERSION)"
         echo "VERSION=$VERSION" >> $GITHUB_ENV
       shell: bash
     - id: publish
-      run: ${{ GITHUB_ACTION_PATH }}/src/publish.sh ${{ inputs.version }} ${{ inputs.docker_compose }} ${{ inputs.docker_user }}
+      run: ${{ github_action_path }}/src/publish.sh ${{ inputs.version }} ${{ inputs.docker_compose }} ${{ inputs.docker_user }}
       shell: bash
