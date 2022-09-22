@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 VERSION="$1"
 OVERRIDE="$2"
 DOC_USER="$DOCKERHUB_USERNAME"
@@ -25,7 +23,7 @@ for IMAGE in $IMAGES; do
    # NAME=$(docker inspect --format '{{ index .Config.Labels "name" }}' $IMAGE)
     #echo "NAME=$NAME"
     #TAG="ghcr.io/${GITHUB_REPOSITORY}/$NAME:$VERSION"
-    TAG="${DOC_USER}/$IMAGE:$VERSION"
+    TAG="${DOC_USER}/${IMAGE:10}:$VERSION"
     echo $TAG
 
     docker tag $IMAGE $TAG
