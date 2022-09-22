@@ -23,5 +23,5 @@ runs:
   using: "composite"
   steps:
     - id: publish
-      run: ${{ github.action_path }}/src/publish.sh ${{ inputs.version }} ${{ inputs.docker_compose }} ${{ inputs.docker_user }}
+      run: ${{ GITHUB_ACTION_PATH }}/src/publish.sh ${{ inputs.version }} ${{ inputs.docker_compose }} ${{ inputs.docker_user }}
       shell: bash
