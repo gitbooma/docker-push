@@ -8,7 +8,7 @@ branding:
 inputs:
   version:
     description: "version"
-    required: true
+    required: false
   docker_compose:
     description: "docker-compose file to build and publish images from"
     required: true
@@ -22,6 +22,17 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - id: tag
+      run: |
+        # if VERSION is not set, get it from git repo
+        VERSION="${{ inputs.version }}"
+        if [ -z "$VERSION" ]; then
+            VERSION=$(${{ GITHUB_ACTION_PATH }}/src/get_version.sh)
+        fi
+        echo "VERSION: $VERSION"
+        echo "::set-output name=semver::$(echo $VERSION)"
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+      shell: bash
     - id: publish
       run: ${{ GITHUB_ACTION_PATH }}/src/publish.sh ${{ inputs.version }} ${{ inputs.docker_compose }} ${{ inputs.docker_user }}
       shell: bash
