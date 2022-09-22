@@ -13,6 +13,9 @@ inputs:
   docker_compose:
     description: "docker-compose file to build and publish images from"
     required: true
+  doc_user: 
+    description: "docker user"
+    required: true
 outputs:
   tag:
     description: "Tag that was published"
@@ -32,5 +35,5 @@ runs:
         echo "VERSION=$VERSION" >> $GITHUB_ENV
       shell: bash
     - id: publish
-      run: ${{ github.action_path }}/src/publish.sh ${{ inputs.version }} ${{ inputs.docker_compose }}
+      run: ${{ github.action_path }}/src/publish.sh ${{ inputs.version }} ${{ inputs.doc_user }} ${{ inputs.docker_compose }} 
       shell: bash

@@ -1,13 +1,13 @@
 VERSION="$1"
 echo "in publish"
-OVERRIDE="$2"
-DOC_USER=env.$DOCKERHUB_USERNAME
+OVERRIDE="$3"
+DOC_USER="$2"
 N="after doc_user"
 
-echo "VERSION=$VERSION"
+echo "ver=$VERSION"
 echo "doc_user=$DOC_USER"
-echo "OVERRIDE=$OVERRIDE"
-echo "DOC_USER=$DOC_USER"
+echo "file=$OVERRIDE"
+
 echo "$N"
 
 
