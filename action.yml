@@ -34,5 +34,5 @@ runs:
         echo "VERSION=$VERSION" >> $GITHUB_ENV
       shell: bash
     - id: publish
-      run: ${{ GITHUB_ACTION_PATH }}/src/publish.sh ${{ inputs.version }} ${{ inputs.docker_compose }} ${{ inputs.docker_user }}
+      run: ${{ GITHUB_ACTION_PATH }}/src/publish.sh ${{ inputs.version }} ${{ inputs.docker_compose }}
       shell: bash
