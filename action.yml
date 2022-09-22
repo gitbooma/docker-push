@@ -32,9 +32,5 @@ runs:
         echo "VERSION=$VERSION" >> $GITHUB_ENV
       shell: bash
     - id: publish
-<<<<<<< HEAD
-      run: ${{ GITHUB_ACTION_PATH }}/src/publish.sh ${{ inputs.version }} ${{ inputs.docker_compose }}
-=======
       run: ${{ github.action_path }}/src/publish.sh ${{ inputs.version }} ${{ inputs.docker_compose }}
->>>>>>> 6795b9ae6e8c2dccff881d51272ccd5c88657832
       shell: bash
