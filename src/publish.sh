@@ -1,11 +1,13 @@
 VERSION="$1"
 OVERRIDE="$2"
 DOC_USER="$DOCKERHUB_USERNAME"
+N="after doc_user"
 
 echo "VERSION=$VERSION"
 echo "doc_user=$DOC_USER"
 echo "OVERRIDE=$OVERRIDE"
 echo "DOC_USER=$DOC_USER"
+echo "$N"
 
 
 #docker login ghcr.io -u ${GITHUB_REF} -p ${REPO_TOKEN}
