@@ -1,0 +1,27 @@
+# action.yml
+name: "Docker-Compose Publish"
+author: "Booma"
+description: "Publish all docker containers in docker-compose file"
+branding:
+  icon: "database"
+  color: "red"
+inputs:
+  version:
+    description: "version"
+    required: true
+  docker_compose:
+    description: "docker-compose file to build and publish images from"
+    required: true
+  docker_user:
+    description: "docker user"
+    required: true
+outputs:
+  tag:
+    description: "Tag that was published"
+    value: ${{ steps.tag.outputs.semver }}
+runs:
+  using: "composite"
+  steps:
+    - id: publish
+      run: ${{ github.action_path }}/src/publish.sh ${{ inputs.version }} ${{ inputs.docker_compose }} ${{ inputs.docker_user }}
+      shell: bash
