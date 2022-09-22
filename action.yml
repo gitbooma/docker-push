@@ -9,13 +9,11 @@ inputs:
   version:
     description: "version"
     required: false
+    default: ''
   docker_compose:
     description: "docker-compose file to build and publish images from"
     required: true
-  docker_user:
-    description: "docker user"
-    required: true
-outputs:
+ outputs:
   tag:
     description: "Tag that was published"
     value: ${{ steps.tag.outputs.semver }}
@@ -27,12 +25,16 @@ runs:
         # if VERSION is not set, get it from git repo
         VERSION="${{ inputs.version }}"
         if [ -z "$VERSION" ]; then
-            VERSION=$(${{ GITHUB_ACTION_PATH }}/src/get_version.sh)
+            VERSION=$(${{ github.action_path }}/src/get_version.sh)
         fi
         echo "VERSION: $VERSION"
         echo "::set-output name=semver::$(echo $VERSION)"
         echo "VERSION=$VERSION" >> $GITHUB_ENV
       shell: bash
     - id: publish
+<<<<<<< HEAD
       run: ${{ GITHUB_ACTION_PATH }}/src/publish.sh ${{ inputs.version }} ${{ inputs.docker_compose }}
+=======
+      run: ${{ github.action_path }}/src/publish.sh ${{ inputs.version }} ${{ inputs.docker_compose }}
+>>>>>>> 6795b9ae6e8c2dccff881d51272ccd5c88657832
       shell: bash
