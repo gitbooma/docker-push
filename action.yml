@@ -17,6 +17,7 @@ runs:
       run: |
         TAG=$(${{ github.action_path }}/src/get_tag.sh)
         echo "TAG=$TAG" >> $GITHUB_ENV
+      shell: bash  
     - id: publish
       run: ${{ github.action_path }}/src/publish.sh ${{ inputs.docker_compose }} $TAG
       shell: bash
