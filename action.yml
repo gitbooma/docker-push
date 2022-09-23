@@ -6,12 +6,11 @@ inputs:
   docker_compose:
     description: "docker-compose file to build and publish images from"
     required: true
- outputs:
-  tag:
+outputs:
+ tag:
     description: "Tag that was published"
     value: ${{ steps.tag.outputs.semver }}
 runs:
-  using: "composite"
   steps:
     - id: publish
       run: ${{ github.action_path }}/src/publish.sh ${{ inputs.docker_compose }} 
