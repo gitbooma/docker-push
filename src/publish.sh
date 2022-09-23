@@ -1,34 +1,28 @@
-VERSION="$1"
+
 echo "in publish"
-OVERRIDE="$3"
-DOC_USER="$2"
-N="after doc_user"
-
-echo "ver=$VERSION"
-echo "doc_user=$DOC_USER"
-echo "file=$OVERRIDE"
-
-echo "$N"
-
+DOCKER_COMPOSE_FILE="$1"
 
 #docker login ghcr.io -u ${GITHUB_REF} -p ${REPO_TOKEN}
+TAG=$(git rev-parse --short HEAD)
+echo "VER=$TAG"
 
-VERSION=$VERSION docker-compose -f $OVERRIDE up --no-start --remove-orphans
+TAG=$TAG docker-compose -f $DOCKER_COMPOSE_FILE up --remove-orphans
 echo "compose done"
-echo "VER=$VERSION"
-IMAGES=$(docker inspect --format='{{.Image}}' $(docker ps -aq))
+IMAGES_OUTPUT=$(docker ps --format '{{.Image}})
+echo "docker ps names"
+echo $IMAGES_OUTPUT
 
-echo "IMAGES: $IMAGES"
-for IMAGE in $IMAGES; do
-    echo "IMAGE: $IMAGE"
+#for IMAGE in $IMAGES; do
+  #  echo "IMAGE: $IMAGE"
     
    # NAME=$(basename ${GITHUB_REPOSITORY}).$(docker inspect --format '{{ index .Config.Labels "name" }}' $IMAGE)
    # NAME=$(docker inspect --format '{{ index .Config.Labels "name" }}' $IMAGE)
     #echo "NAME=$NAME"
     #TAG="ghcr.io/${GITHUB_REPOSITORY}/$NAME:$VERSION"
-    TAG="${DOC_USER}/${IMAGE:10}:$VERSION"
-    echo $TAG
+    #TAG="${DOC_USER}/${IMAGE:10}:$VERSION"
+    #echo $TAG
 
-    docker tag $IMAGE $TAG
-    docker push $TAG
-done
+    #docker tag $IMAGE $TAG
+    #TAG=docker ps --format '{{.Image}}
+    docker compose push
+#done
