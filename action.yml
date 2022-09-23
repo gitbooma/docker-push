@@ -11,7 +11,12 @@ outputs:
     description: "Tag that was published"
     value: ${{ steps.tag.outputs.semver }}
 runs:
+  using 'composite'
   steps:
+    - id: tag
+      run: |
+        TAG=$(${{ github.action_path }}/src/get_tag.sh)
+        echo "TAG=$TAG" >> $GITHUB_ENV
     - id: publish
-      run: ${{ github.action_path }}/src/publish.sh ${{ inputs.docker_compose }} 
+      run: ${{ github.action_path }}/src/publish.sh ${{ inputs.docker_compose }} $TAG
       shell: bash
