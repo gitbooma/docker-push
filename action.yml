@@ -11,7 +11,7 @@ outputs:
     description: "Tag that was published"
     value: ${{ steps.tag.outputs.semver }}
 runs:
-  using 'composite'
+  using: "composite"
   steps:
     - id: tag
       run: |
