@@ -2,7 +2,7 @@
 echo "in publish"
 #DOCKER_COMPOSE_FILE="$1"
 echo "10000000000 $TAG"
-echo $THEME
+echo "here env.$THEME"
 
 if [[ -n "$THEME"]]
 then
