@@ -4,8 +4,7 @@ echo "in publish"
 echo "10000000000 $TAG"
 echo "here env.$THEME"
 
-if [[ -n "$THEME"]]
-then
+if [ -n "${THEME}" ]; then
 TAG="$THEME:$TAG"
 echo "combine"
 echo $TAG
